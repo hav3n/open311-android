@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import android.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
+
 
 public class SettingsActivity extends BaseFragmentActivity {
 	@Override
@@ -36,6 +38,18 @@ public class SettingsActivity extends BaseFragmentActivity {
 		actionBar.addTab(tab);
 	}
 	
+	@Override
+	public boolean OnCreateOptionsMenu(Menu menu){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.main.menu, menu);
+		
+		MenuItem item = menu.findItem(R.id.menu_settings);
+		item.setEnabled(false);
+		
+		invalidateOptionsMenu();
+		return super.OnCreateOptionsMenu();
+	}
+	
 	/**
 	 * Copy of implementation from Android developer docs
 	 * 
@@ -47,6 +61,7 @@ public class SettingsActivity extends BaseFragmentActivity {
 	    private final SettingsActivity mActivity;
 	    private final String mTag;
 	    private final Class<T> mClass;
+
 
 	    /** Constructor used each time a new tab is created.
 	      * @param settingsActivity  The host Activity, used to instantiate the fragment
